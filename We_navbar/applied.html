@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+       table,
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+
+tr > th {
+  background-color:rgb(15, 35, 35);
+  color: white;
+}
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div><a href="we_session.html">Home</a></div>
+        <div><a href="applied.html">Applied Jobs</a></div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <main>
+        <table>
+            <thead class="baju">
+                <tr >
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Salary expected</th>
+                    <th>Add to Bookmark</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
+<script>
+    var jobarr=JSON.parse(localStorage.getItem("joblist"))
+    deshmere(jobarr);
+    var bookarr=JSON.parse(localStorage.getItem("bookmarks")) || []
+
+    function deshmere(jobarr) {
+        jobarr.forEach(function (elem) {
+            var tr=document.createElement("tr");
+
+            var td1 =document.createElement("td");
+            td1.innerText=elem.pName
+            var td2 =document.createElement("td");
+            td2.innerText=elem.pEmail
+            var td3 =document.createElement("td");
+            td3.innerText=elem.pRole
+            var td4 =document.createElement("td");
+            td4.innerText=elem.psalary
+
+            var td5=document.createElement("td");
+            td5.innerText="Bookmark"
+            td5.style.color="blue";
+            td5.style.cursor="pointer"
+            td5.addEventListener("click",function () {
+                bookmarkcall(elem)
+            })
+            tr.append(td1,td2,td3,td4,td5)
+            document.querySelector("tbody").append(tr);
+            
+        });
+    }
+    function bookmarkcall(elem){
+        bookarr.push(elem);
+        localStorage.setItem("bookmarks",JSON.stringify(bookarr))
+
+    }
+</script>

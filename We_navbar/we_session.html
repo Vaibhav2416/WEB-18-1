@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="navbar">
+        <div><a href="we_session.html">Home</a></div>
+        <div><a href="applied.html">Applied Jobs</a></div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+    <form id="form">
+        <h2>Enter Your Application Details</h2>
+        <input type="text" id="naam" placeholder="Enter Name">
+        <input type="email" id="pata" placeholder="Enter Email" >
+        <select id="role">
+            <option value="FSD">FSD</option>
+            <option value="Backend">Backend</option>
+            <option value="FSD">Frontend</option>
+        </select>
+        <input id="salary" type="number" placeholder="Enter Expected Salary">
+        <input id="submit" type="submit" value="submit">
+    </form>
+</body>
+</html>
+<script>
+    document.querySelector("#form").addEventListener("submit",karam)
+    var jobarr=JSON.parse(localStorage.getItem("joblist")) || []
+
+    function karam() {
+        event.preventDefault()
+        var jobobj={
+            pName: form.naam.value,
+            pEmail: form.pata.value,
+            pRole:form.role.value,
+            psalary:form.salary.value,
+
+        };
+        jobarr.push(jobobj);
+        localStorage.setItem("joblist",JSON.stringify(jobarr))
+        window.location.href="applied.html"
+    }
+</script>
